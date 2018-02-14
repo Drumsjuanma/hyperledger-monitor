@@ -1,12 +1,14 @@
 #Installation of Hyperledger Fabric v1.0 from Source on Ubuntu 16.04 LTS
 
 #Installing Go Language
-#cd $HOME/ && wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
-#tar -xvf go1.7.1.linux-amd64.tar.gz
-#mkdir $HOME/gopath 
-#export GOPATH=$HOME/gopath 
-#export GOROOT=$HOME/go 
-#export PATH=$PATH:$GOROOT/bin 
+cd $HOME/ && wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
+tar -xvf go1.7.1.linux-amd64.tar.gz
+mkdir $HOME/gopath 
+export GOPATH=$HOME/gopath 
+export GOROOT=$HOME/go 
+export PATH=$PATH:$GOROOT/bin
+go version
+
 
 #GNU libtool: libltdl-dev
 apt-get install libltdl-dev
