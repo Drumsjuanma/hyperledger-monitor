@@ -1,11 +1,13 @@
-#Installation of Hyperledger Fabric v1.0 from Source on Ubuntu 16.04 LTS
+#!/bin/bash
 
+set -e
+#Installation of Hyperledger Fabric v1.0 from Source on Ubuntu 16.04 LTS
 #Installing Go Language
 cd $HOME/ && wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
 tar -xvf go1.7.1.linux-amd64.tar.gz
 mkdir $HOME/gopath 
 export GOPATH=$HOME/gopath 
-export GOROOT=$HOME/go 
+export GOROOT=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 go version
 
@@ -25,3 +27,9 @@ pip install docker-compose
 
 #Install Curl
 apt-get install curl
+
+echo $GOPATH
+echo $GOROOT
+echo $PATH
+
+set +e
