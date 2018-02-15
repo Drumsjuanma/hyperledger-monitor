@@ -1,11 +1,11 @@
-export GOPATH=$HOME/gopath
-export GOROOT=$HOME/go
-export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/
+#export GOROOT=$HOME/
+export PATH=$PATH:$GOPATH/bin
 
-mkdir -p $GOPATH/src/github.com/hyperledger/
-cd $GOPATH/src/github.com/hyperledger/ 
+mkdir -p $GOPATH/hyperledger/
+cd $GOPATH/hyperledger/ 
 git clone https://github.com/hyperledger/fabric.git
 cd fabric
 make
-export PATH=$PATH:$GOPATH/src/github.com/hyperledger/fabric/build/bin/
-cd examples/e2e_cli/ && ./network_setup.sh up
+
+#cd examples/e2e_cli/ && ./network_setup.sh up

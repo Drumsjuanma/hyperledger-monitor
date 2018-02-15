@@ -12,7 +12,6 @@ if [ $OS = "centos" ] || [ $OS = "rhel" ];then
   #TODO
   echo "Installing the environment in " + $OS 
   echo 'TODO'
-fi
 
 #Installation in Ubuntu
 elif [ $OS = "ubuntu" ];then
@@ -59,6 +58,22 @@ elif [ $OS = "ubuntu" ];then
   #Install Curl
   apt-get install curl
 fi
+
+# Manage GOROOT variable
+if [[ -z "$GOROOT" ]]; then
+    echo "[*] Trying default $GOROOT. "
+    echo 'export GOROOT=/usr/local/go' >> $HOME/.bashrc
+    echo 'export GOPATH=$GOPATH:HOME/hyperledger' >> $HOME/.bashrc
+    echo 'export PATH=$GOROOT/bin:$GOPATH/bin:$PATH' >> $HOME/.bashrc
+    export GOROOT=/usr/local/go
+    export GOPATH=$GOPATH:$HOME/hyperledger
+    export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+    echo "[*] GOROOT = $GOROOT, GOPATH = $GOPATH"
+
+    mkdir -p "$GOPATH"/bin
+    mkdir -p "$GOPATH"/src
+
 
 
 echo 'Instalacion completada'
