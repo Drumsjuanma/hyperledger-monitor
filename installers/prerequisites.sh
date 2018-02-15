@@ -16,32 +16,17 @@ if [ $OS = "centos" ] || [ $OS = "rhel" ];then
 #Installation in Ubuntu
 elif [ $OS = "ubuntu" ];then
   echo "Installing the environment in " + $OS 
+  
+  #Installing GO
+  cd $HOME/ && wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
+  tar -xvf go1.7.1.linux-amd64.tar.gz
+  mkdir $HOME/gopath 
+  export GOPATH=$HOME/gopath 
+  export GOROOT=$HOME/go 
+  export PATH=$PATH:$GOROOT/bin   
+  rm go1.7.1.linux-amd64.tar.gz
 
-  GOREL="go1.7.3.linux-amd64.tar.gz"
-
-  #Do not mess with Go instalations
-  if ! type "go" > /dev/null; then
-    #INSTALACION DE GO
-    PATH="$PATH:/usr/local/go/bin"
-    echo "Installing GO"
-    wget -q "https://storage.googleapis.com/golang/${GOREL}"
-    tar -xvzf "${GOREL}"
-    mv go /usr/local/go
-    sudo rm "${GOREL}"
-  else
-    V1=$(go version | grep -oP '\d+(?:\.\d+)+')
-    V2=$(echo $GOREL | grep -oP '\d+(?:\.\d+)+')
-    nV1=$(echo $V1 | sed 's/\.//g')
-    nV2=$(echo $V2 | sed 's/\.//g')
-    if (( $nV1 >= $nV2 )); then
-       echo "Using your own version of Go"
-    else
-       echo "Your version of go is smaller than required"
-       exit
-    fi
-  fi
-
-  #GNU libtool: libltdl-dev
+#GNU libtool: libltdl-dev
   apt-get install libltdl-dev
 
   #Install Docker
@@ -58,21 +43,6 @@ elif [ $OS = "ubuntu" ];then
   #Install Curl
   apt-get install curl
 fi
-
-# Manage GOROOT variable
-if [[ -z "$GOROOT" ]]; then
-    echo "[*] Trying default $GOROOT. "
-    echo 'export GOROOT=/usr/local/go' >> $HOME/.bashrc
-    echo 'export GOPATH=$GOPATH:HOME/hyperledger' >> $HOME/.bashrc
-    echo 'export PATH=$GOROOT/bin:$GOPATH/bin:$PATH' >> $HOME/.bashrc
-    export GOROOT=/usr/local/go
-    export GOPATH=$GOPATH:$HOME/hyperledger
-    export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
-
-    echo "[*] GOROOT = $GOROOT, GOPATH = $GOPATH"
-
-    mkdir -p "$GOPATH"/bin
-    mkdir -p "$GOPATH"/src
 
 
 
